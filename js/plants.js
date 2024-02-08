@@ -11,23 +11,35 @@ updown.onclick = function () {
 };
 
 // counter landing-page-six (6) (latest-event)
-let counterdown = new Date("FEB 31, 2023 11:59:59").getTime();
+let counterdown = new Date("FEB 6, 2024 11:26:00").getTime();
 
 let counter = setInterval(function () {
   // get time by milliseconds
   let datenow = new Date().getTime();
   //           get diffr
   let diffdate = counterdown - datenow;
-  let days = Math.floor(diffdate / (1000 * 60 * 60 * 24));
-  let Hours = Math.floor((diffdate % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-  let minutes = Math.floor((diffdate % (1000 * 60 * 60)) / (1000 * 60));
-  let seconds = Math.floor((diffdate % (1000 * 60)) / 1000);
 
-  document.querySelector(".days").innerHTML = days;
-  document.querySelector(".hours").innerHTML = Hours;
-  document.querySelector(".minutes").innerHTML = minutes;
-  document.querySelector(".seconds").innerHTML =
-    seconds < 10 ? `0${seconds}` : seconds;
+  if (diffdate <= 0) {
+    clearInterval(counter);
+
+    document.querySelector(".days").innerHTML = "00";
+    document.querySelector(".hours").innerHTML = "00";
+    document.querySelector(".minutes").innerHTML = "00";
+    document.querySelector(".seconds").innerHTML = "00";
+  } else {
+    let days = Math.floor(diffdate / (1000 * 60 * 60 * 24));
+    let hours = Math.floor(
+      (diffdate % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
+    );
+    let minutes = Math.floor((diffdate % (1000 * 60 * 60)) / (1000 * 60));
+    let seconds = Math.floor((diffdate % (1000 * 60)) / 1000);
+
+    document.querySelector(".days").innerHTML = days;
+    document.querySelector(".hours").innerHTML = hours;
+    document.querySelector(".minutes").innerHTML = minutes;
+    document.querySelector(".seconds").innerHTML =
+      seconds < 10 ? `0${seconds}` : seconds;
+  }
 }, 1000);
 
 // landing page (7) (Our Awesome Stats (Increase Numbers On))
